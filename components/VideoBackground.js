@@ -11,7 +11,7 @@ const VideoBackground = () => {
         muted
         playsInline
         preload="metadata"
-        poster="/images/marble-white.webp"
+        poster="/images/marble-white22.webp"
         className="background-video"
       >
         {/* MP4 - Best compatibility for Safari */}
@@ -24,7 +24,7 @@ const VideoBackground = () => {
         {/* Fallback content for browsers that don't support video */}
         <div className="video-fallback">
           <img
-            src="/images/marble-white.webp"
+            src="/images/marble-white22.webp"
             alt="Background texture"
             className="fallback-image"
           />
@@ -36,7 +36,7 @@ const VideoBackground = () => {
       {/* Fallback for iOS Safari when video doesn't load */}
       <div className="ios-fallback" style={{ display: "none" }}>
         <img
-          src="/images/marble-white.webp"
+          src="/images/marble-white22.webp"
           alt="Background texture"
           className="ios-fallback-image"
         />
