@@ -5,12 +5,14 @@ import Logo from "./Logo";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { Globe, ChevronDown } from "lucide-react";
+import { useRouter } from "next/router";
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const { lang, toggleLanguage } = useLanguage();
+  const router = useRouter();
   const languageDropdownRef = useRef(null);
 
   const handleClick = () => setClick(!click);
@@ -54,16 +56,19 @@ function Navbar() {
 
   const handleLanguageChange = (newLang) => {
     if (newLang !== lang) {
-      // Use the existing toggle logic but cycle to the target language
-      let currentIndex = languages.findIndex((l) => l.code === lang);
-      let targetIndex = languages.findIndex((l) => l.code === newLang);
+      // Directly navigate to the target language using router
+      const basePath = router.asPath.replace(/^\/(en|he|ar)/, "");
 
-      // Calculate how many toggles needed to reach target
-      let togglesNeeded = (targetIndex - currentIndex + 3) % 3;
-
-      // Apply the toggles
-      for (let i = 0; i < togglesNeeded; i++) {
-        toggleLanguage();
+      if (newLang === "he") {
+        // Go to root path with no locale prefix
+        const targetPath = basePath === "" ? "/" : basePath;
+        router.push(targetPath, targetPath, { locale: newLang });
+      } else {
+        // Add locale prefix
+        const targetPath = `/${newLang}${
+          basePath.startsWith("/") ? basePath : "/" + basePath
+        }`;
+        router.push(targetPath, targetPath, { locale: newLang });
       }
     }
     setIsLanguageOpen(false);

@@ -23,12 +23,14 @@ export const LanguageProvider = ({ children }) => {
 
     if (newLocale === "he") {
       // Go to root path with no locale prefix
-      window.location.href = basePath === "" ? "/" : basePath;
+      const targetPath = basePath === "" ? "/" : basePath;
+      router.push(targetPath, targetPath, { locale: newLocale });
     } else {
       // Add locale prefix
-      window.location.href = `/${newLocale}${
+      const targetPath = `/${newLocale}${
         basePath.startsWith("/") ? basePath : "/" + basePath
       }`;
+      router.push(targetPath, targetPath, { locale: newLocale });
     }
   };
 

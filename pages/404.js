@@ -49,7 +49,6 @@ export default function AccessibilityStatement() {
               </>
             )}
           </div>
-          <LogoTab />
           <EndingSection />
         </div>
       </div>
