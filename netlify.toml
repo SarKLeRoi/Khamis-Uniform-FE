@@ -1,0 +1,12 @@
+[build]
+  command = "yarn build"
+  publish = ".next"
+
+[functions]
+  directory = "netlify/functions"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[plugins]]
+  package = "@netlify/plugin-emails"
