@@ -76,7 +76,7 @@ function Navbar() {
       services: "שירותים",
       projects: "גלרייה",
       contact: "צור קשר",
-      phone: "052-558-3898",
+      phone: "04-6576068",
     },
     ar: {
       home: "الرئيسية",
@@ -84,7 +84,7 @@ function Navbar() {
       services: "خدماتنا",
       projects: "معرض الصور",
       contact: "اتصل بنا",
-      phone: "052-558-3898",
+      phone: "04-6576068",
     },
     en: {
       home: "Home",
@@ -92,7 +92,7 @@ function Navbar() {
       services: "Services",
       projects: "Gallery",
       contact: "Contact",
-      phone: "+97252-558-3898",
+      phone: "04-6576068",
     },
   };
 
