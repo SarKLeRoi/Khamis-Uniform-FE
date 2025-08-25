@@ -26,7 +26,7 @@ export default function FinalSection() {
   const t = content[lang] || content.he;
 
   const handleNavigation = () => {
-    window.open("https://wa.me/9724657608", "_blank");
+    window.open("https://wa.me/97246576068", "_blank");
   };
 
   return (

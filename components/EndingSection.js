@@ -139,7 +139,7 @@ export default function Footer() {
                 {t.email} <span className="icon-svg email" />
               </a>
               <a
-                href="tel:9724657606"
+                href="tel:97246576068"
                 className="contact-svg-footer"
                 aria-label={
                   lang === "he"
@@ -178,7 +178,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           ></a>
           <a
-            href="https://wa.me/9724657608"
+            href="https://wa.me/97246576068"
             className="icon-svg whatsapp"
             aria-label="Whatsapp"
             target="_blank"
