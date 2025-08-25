@@ -11,29 +11,38 @@ export default function TitleRow() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
+  // Ensure we have a valid language, default to 'he' if undefined
+  const currentLang = lang || "he";
+
   const languages = [
     { code: "he", name: "עברית" },
     { code: "ar", name: "العربية" },
     { code: "en", name: "English" },
   ];
 
-  const currentLanguage = languages.find((l) => l.code === lang);
+  const currentLanguage = languages.find((l) => l.code === currentLang);
 
   const handleLanguageChange = (newLang) => {
-    if (newLang !== lang) {
-      // Directly navigate to the target language using router
-      const basePath = router.asPath.replace(/^\/(en|he|ar)/, "");
+    if (newLang !== currentLang) {
+      try {
+        // Directly navigate to the target language using simple navigation
+        const basePath = window.location.pathname.replace(/^\/(en|he|ar)/, "");
 
-      if (newLang === "he") {
-        // Go to root path with no locale prefix
-        const targetPath = basePath === "" ? "/" : basePath;
-        router.push(targetPath, targetPath, { locale: newLang });
-      } else {
-        // Add locale prefix
-        const targetPath = `/${newLang}${
-          basePath.startsWith("/") ? basePath : "/" + basePath
-        }`;
-        router.push(targetPath, targetPath, { locale: newLang });
+        if (newLang === "he") {
+          // Go to root path with no locale prefix
+          const targetPath = basePath === "" ? "/" : basePath;
+          window.location.href = targetPath;
+        } else {
+          // Add locale prefix
+          const targetPath = `/${newLang}${
+            basePath.startsWith("/") ? basePath : "/" + basePath
+          }`;
+          window.location.href = targetPath;
+        }
+      } catch (error) {
+        console.error("Language change error:", error);
+        // Fallback to simple page reload
+        window.location.reload();
       }
     }
     setIsOpen(false);
@@ -87,7 +96,7 @@ export default function TitleRow() {
             <path d="M15,3C8.373,3,3,8.373,3,15c0,6.016,4.432,10.984,10.206,11.852V18.18h-2.969v-3.154h2.969v-2.099c0-3.475,1.693-5,4.581-5 c1.383,0,2.115,0.103,2.461,0.149v2.753h-1.97c-1.226,0-1.654,1.163-1.654,2.473v1.724h3.593L19.73,18.18h-3.106v8.697 C22.481,26.083,27,21.075,27,15C27,8.373,21.627,3,15,3z"></path>
           </svg>
         </a>
-        <a href="https://wa.me/9724657606" className="social-button whatsapp">
+        <a href="https://wa.me/9724657608" className="social-button whatsapp">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
@@ -127,7 +136,7 @@ export default function TitleRow() {
                   <button
                     key={language.code}
                     className={`language-option ${
-                      language.code === lang ? "active" : ""
+                      language.code === currentLang ? "active" : ""
                     }`}
                     onClick={() => handleLanguageChange(language.code)}
                     aria-label={`Select ${language.name}`}

@@ -8,34 +8,43 @@ export const LanguageProvider = ({ children }) => {
   const router = useRouter();
   const { locale, pathname, asPath, query } = router;
 
+  // Ensure we have a valid locale, default to 'he' if undefined
+  const currentLocale = locale || "he";
+
   const toggleLanguage = () => {
-    let newLocale;
-    if (locale === "he") {
-      newLocale = "ar";
-    } else if (locale === "ar") {
-      newLocale = "en";
-    } else {
-      newLocale = "he";
-    }
+    try {
+      let newLocale;
+      if (currentLocale === "he") {
+        newLocale = "ar";
+      } else if (currentLocale === "ar") {
+        newLocale = "en";
+      } else {
+        newLocale = "he";
+      }
 
-    // Normalize current path by removing existing locale prefix
-    const basePath = asPath.replace(/^\/(en|he|ar)/, "");
+      // Normalize current path by removing existing locale prefix
+      const basePath = (asPath || "/").replace(/^\/(en|he|ar)/, "");
 
-    if (newLocale === "he") {
-      // Go to root path with no locale prefix
-      const targetPath = basePath === "" ? "/" : basePath;
-      router.push(targetPath, targetPath, { locale: newLocale });
-    } else {
-      // Add locale prefix
-      const targetPath = `/${newLocale}${
-        basePath.startsWith("/") ? basePath : "/" + basePath
-      }`;
-      router.push(targetPath, targetPath, { locale: newLocale });
+      if (newLocale === "he") {
+        // Go to root path with no locale prefix
+        const targetPath = basePath === "" ? "/" : basePath;
+        window.location.href = targetPath;
+      } else {
+        // Add locale prefix
+        const targetPath = `/${newLocale}${
+          basePath.startsWith("/") ? basePath : "/" + basePath
+        }`;
+        window.location.href = targetPath;
+      }
+    } catch (error) {
+      console.error("Language switch error:", error);
+      // Fallback to simple page reload
+      window.location.reload();
     }
   };
 
   return (
-    <LanguageContext.Provider value={{ lang: locale, toggleLanguage }}>
+    <LanguageContext.Provider value={{ lang: currentLocale, toggleLanguage }}>
       {children}
     </LanguageContext.Provider>
   );

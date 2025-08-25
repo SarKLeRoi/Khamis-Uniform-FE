@@ -15,6 +15,9 @@ function Navbar() {
   const router = useRouter();
   const languageDropdownRef = useRef(null);
 
+  // Ensure we have a valid language, default to 'he' if undefined
+  const currentLang = lang || "he";
+
   const handleClick = () => setClick(!click);
 
   const handleSubMenu = (menu) => {
@@ -52,23 +55,29 @@ function Navbar() {
     { code: "en", name: "English" },
   ];
 
-  const currentLanguage = languages.find((l) => l.code === lang);
+  const currentLanguage = languages.find((l) => l.code === currentLang);
 
   const handleLanguageChange = (newLang) => {
-    if (newLang !== lang) {
-      // Directly navigate to the target language using router
-      const basePath = router.asPath.replace(/^\/(en|he|ar)/, "");
+    if (newLang !== currentLang) {
+      try {
+        // Directly navigate to the target language using simple navigation
+        const basePath = window.location.pathname.replace(/^\/(en|he|ar)/, "");
 
-      if (newLang === "he") {
-        // Go to root path with no locale prefix
-        const targetPath = basePath === "" ? "/" : basePath;
-        router.push(targetPath, targetPath, { locale: newLang });
-      } else {
-        // Add locale prefix
-        const targetPath = `/${newLang}${
-          basePath.startsWith("/") ? basePath : "/" + basePath
-        }`;
-        router.push(targetPath, targetPath, { locale: newLang });
+        if (newLang === "he") {
+          // Go to root path with no locale prefix
+          const targetPath = basePath === "" ? "/" : basePath;
+          window.location.href = targetPath;
+        } else {
+          // Add locale prefix
+          const targetPath = `/${newLang}${
+            basePath.startsWith("/") ? basePath : "/" + basePath
+          }`;
+          window.location.href = targetPath;
+        }
+      } catch (error) {
+        console.error("Language change error:", error);
+        // Fallback to simple page reload
+        window.location.reload();
       }
     }
     setIsLanguageOpen(false);
@@ -101,15 +110,19 @@ function Navbar() {
     },
   };
 
-  const t = navLabels[lang];
+  const t = navLabels[currentLang];
 
   return (
-    <div className={`navbar ${lang === "he" || lang === "ar" ? "rtl" : "ltr"}`}>
+    <div
+      className={`navbar ${
+        currentLang === "he" || currentLang === "ar" ? "rtl" : "ltr"
+      }`}
+    >
       {" "}
       {/* Add language class for direction */}
       <div
         className={`mobile-navbar ${
-          lang === "he" || lang === "ar" ? "rtl" : "ltr"
+          currentLang === "he" || currentLang === "ar" ? "rtl" : "ltr"
         }`}
       >
         <Logo />
@@ -154,7 +167,11 @@ function Navbar() {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            <ul className={lang === "he" || lang === "ar" ? "rtl" : "ltr"}>
+            <ul
+              className={
+                currentLang === "he" || currentLang === "ar" ? "rtl" : "ltr"
+              }
+            >
               <li>
                 <Link legacyBehavior href="#">
                   <a
@@ -212,7 +229,7 @@ function Navbar() {
                 <a
                   href="/contact"
                   className={`contact-link ${
-                    lang === "he" || lang === "ar" ? "rtl" : "ltr"
+                    currentLang === "he" || currentLang === "ar" ? "rtl" : "ltr"
                   }`}
                 >
                   {t.phone}
@@ -259,7 +276,7 @@ function Navbar() {
                         <button
                           key={language.code}
                           className={`language-option ${
-                            language.code === lang ? "active" : ""
+                            language.code === currentLang ? "active" : ""
                           }`}
                           onClick={() => handleLanguageChange(language.code)}
                           aria-label={`Select ${language.name}`}
@@ -277,18 +294,19 @@ function Navbar() {
       </AnimatePresence>
       <ul
         className={`desktop-menu ${click ? "hidden" : ""} ${
-          lang === "he" || lang === "ar" ? "rtl" : "ltr"
+          currentLang === "he" || currentLang === "ar" ? "rtl" : "ltr"
         }`}
         role="navigation"
         aria-label={
-          lang === "he"
+          currentLang === "he"
             ? "ניווט ראשי"
-            : lang === "ar"
+            : currentLang === "ar"
             ? "الملاحة الرئيسية"
             : "Main navigation"
         }
         style={{
-          justifyContent: lang === "he" || lang === "ar" ? "center" : "center",
+          justifyContent:
+            currentLang === "he" || currentLang === "ar" ? "center" : "center",
         }}
       >
         {/* <Logo isSticky={isSticky} /> */}

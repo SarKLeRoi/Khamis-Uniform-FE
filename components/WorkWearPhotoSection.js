@@ -19,13 +19,13 @@ const ImageContainer = ({
     {isOverlay ? (
       <div className="homepage-image-text-overlay">
         <h1>{title}</h1>
-        <h3>{subtitle}</h3>
+        {/* <h3>{subtitle}</h3> */}
       </div>
     ) : (
       <>
         <h1>{title}</h1>
         <h2>{description}</h2>
-        <h3>{subtitle}</h3>
+        {/* <h3>{subtitle}</h3> */}
       </>
     )}
   </div>

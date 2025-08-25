@@ -178,7 +178,7 @@ export default function Footer() {
             rel="noopener noreferrer"
           ></a>
           <a
-            href="https://wa.me/9724657606"
+            href="https://wa.me/9724657608"
             className="icon-svg whatsapp"
             aria-label="Whatsapp"
             target="_blank"

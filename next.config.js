@@ -4,7 +4,13 @@ const nextConfig = {
   i18n: {
     locales: ["he", "ar", "en"],
     defaultLocale: "he",
-    localeDetection: false, // Optional: auto-detect browser language
+    localeDetection: false,
+    domains: [
+      {
+        domain: "khamisuniform.com",
+        defaultLocale: "he",
+      },
+    ],
   },
   devIndicators: false,
   images: {
@@ -12,6 +18,9 @@ const nextConfig = {
   },
   eslint: {
     ignoreDuringBuilds: true, // Prevent ESLint errors from failing the build on Netlify
+  },
+  experimental: {
+    forceSwcTransforms: true,
   },
 };
 
