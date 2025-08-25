@@ -7,8 +7,6 @@ import StatCounter from "../components/StartCounter";
 import { motion } from "framer-motion";
 import GalleryGrid from "@/components/GalleryGrid";
 import ServicesShowcase from "../components/Services";
-import Contact from "../components/Contact";
-import Projects from "../components/Projects";
 import { useLanguage } from "../context/LanguageContext";
 import Script from "next/script";
 import Slider from "react-slick";
