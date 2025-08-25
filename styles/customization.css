@@ -724,6 +724,18 @@ nav.title-row-sticky-scroll {
   }
 }
 
+/* Mobile-specific gallery optimizations */
+@media (max-width: 480px) {
+  .gallery-container {
+    padding-bottom: 15px;
+  }
+
+  .gallery-loading {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+}
+
 /* View All Overlay */
 .view-all-overlay {
   position: absolute;
@@ -799,18 +811,6 @@ nav.title-row-sticky-scroll {
   .view-all-content {
     border-width: 1px;
     padding: 0.75rem;
-  }
-}
-
-/* Mobile-specific gallery optimizations */
-@media (max-width: 480px) {
-  .gallery-container {
-    padding-bottom: 15px;
-  }
-
-  .gallery-loading {
-    padding: 1.5rem;
-    font-size: 1rem;
   }
 }
 
@@ -1024,8 +1024,7 @@ nav.title-row-sticky-scroll {
   display: none !important;
 }
 
-/* Simple "View All" Box - No longer used */
-/*
+/* Simple View All Box */
 .simple-view-all-box {
   background-color: #e5e7eb;
   color: #1f2937;
@@ -1037,12 +1036,10 @@ nav.title-row-sticky-scroll {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
 }
-*/
 .mobile-navbar {
   background-color: var(--color-text-white);
   border-bottom: solid 1px #25252547;
 }
-/*
 .simple-view-all-box:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
@@ -1063,7 +1060,6 @@ nav.title-row-sticky-scroll {
     padding: 2.5rem 1rem;
   }
 }
-*/
 
 /*Footer*/
 .homepage-contactinfo-section {
