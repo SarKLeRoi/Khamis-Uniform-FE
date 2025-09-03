@@ -403,7 +403,7 @@ export default function HomePage() {
         strategy="afterInteractive"
       />
       <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=G-QDN4FFSPG8`}
+        src={`https://www.googletagmanager.com/gtag/js?id=G-N4K3ZKECFZ`}
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
@@ -411,7 +411,7 @@ export default function HomePage() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-QDN4FFSPG8');
+          gtag('config', 'G-N4K3ZKECFZ');
         `}
       </Script>
       <div className="sticky-header-wrapper">
